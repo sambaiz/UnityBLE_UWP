@@ -65,9 +65,16 @@ namespace Use
 
         private async void characteristicReceivedAsync(object sender, UnityBLE.CharacteristicArgs args)
         {
-            if (sender == ble && args.ex == null)
+            if (sender == ble)
             {
-                await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () => receivedData.Text = System.Text.Encoding.UTF8.GetString(args.Value));
+                if (args.ex == null)
+                {
+                    await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () => receivedData.Text = System.Text.Encoding.UTF8.GetString(args.Value));
+                }
+                else
+                {
+                    await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () => receivedData.Text = args.ex.Message);
+                }
             }
         }
     }

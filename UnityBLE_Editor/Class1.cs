@@ -96,7 +96,7 @@ namespace UnityBLE
         {
             if (sender == deviceWatcher)
             {
-                if (deviceInfo.Name != string.Empty)
+                if (deviceInfo.Name != string.Empty && deviceInfo.Pairing.IsPaired)
                 {
                     DeviceAdded(this, new DeviceArgs(deviceInfo.Id, deviceInfo.Name));
                 }
