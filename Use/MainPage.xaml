@@ -1,0 +1,18 @@
+﻿<Page
+    x:Class="Use.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Use"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Button Content="Search" Margin="0,10,10,0" VerticalAlignment="Top" Click="Button_Click" HorizontalAlignment="Right" Width="65"/>
+        <TextBox x:Name="serviceUUID" Margin="10,10,80,0" TextWrapping="Wrap" Text="bf9cb85f-620c-4a67-bdd2-1a64213f74ca" VerticalAlignment="Top" PlaceholderText="SERVICE_UUID"/>
+        <ListView x:Name="deviceList" Height="100" Margin="10,121,10,0" VerticalAlignment="Top" BorderThickness="0,0,0,5" SelectionChanged="deviceList_SelectionChanged"/>
+        <TextBlock x:Name="receivedData" Margin="10,221,10,0" TextWrapping="Wrap" Text="Recived Data" VerticalAlignment="Top"/>
+        <TextBox x:Name="characteristicUUID" Margin="10,67,80,0" TextWrapping="Wrap" Text="5f83e23f-bca1-42b3-b6f2-ea82be46a93d" VerticalAlignment="Top" RenderTransformOrigin="-0.653,-0.344" Height="49" PlaceholderText="CHARACTERISTIC_UUID"/>
+
+    </Grid>
+</Page>
