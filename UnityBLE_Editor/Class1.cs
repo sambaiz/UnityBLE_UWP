@@ -120,7 +120,7 @@ namespace UnityBLE
 
                 var service = device.GetGattService(new Guid(serviceUUID));
 
-                var characteristics = service.GetAllIncludedServices()[0].GetCharacteristics(new Guid(characteristicUUID));
+                var characteristics = service.GetCharacteristics(new Guid(characteristicUUID));
 
                 if(characteristics.Count == 0)
                 {
