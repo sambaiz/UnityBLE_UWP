@@ -115,28 +115,31 @@ namespace UnityBLE
         {
 #if WINDOWS_UWP
             try{
+                
                 var device = await BluetoothLEDevice.FromIdAsync(deviceId);
-        
-                var services = await device.GetGattServicesForUuidAsync(new Guid(serviceUUID));
 
-                if (services.Services.Count == 0)
+                var services = device.GetGattService(new Guid(serviceUUID));
+
+
+                if (services.GetAllIncludedServices().Count == 0)
                 {
                     throw new Exception("no service");
                 }
 
-                var characteristics = await services.Services[0].GetCharacteristicsForUuidAsync(new Guid(characteristicUUID));
 
-                if(characteristics.Characteristics.Count == 0)
+                var characteristics = services.GetAllIncludedServices()[0].GetCharacteristics(new Guid(characteristicUUID));
+
+                if(characteristics.Count == 0)
                 {
                     throw new Exception("no characteristic");
                 }
 
-                characteristics.Characteristics[0].ValueChanged += characteristicChanged;
+                
+                characteristics[0].ValueChanged += characteristicChanged;
 
-                await characteristics.Characteristics[0].WriteClientCharacteristicConfigurationDescriptorAsync(
+                await characteristics[0].WriteClientCharacteristicConfigurationDescriptorAsync(
                     GattClientCharacteristicConfigurationDescriptorValue.Notify
-                );
-        
+                );        
             }
             catch(Exception e)
             {
