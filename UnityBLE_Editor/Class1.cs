@@ -51,6 +51,7 @@ namespace UnityBLE
 
 #if WINDOWS_UWP
         private DeviceWatcher deviceWatcher;
+        private GattCharacteristic charactersitics;
 #endif
 
         public void Start()
@@ -127,14 +128,16 @@ namespace UnityBLE
                     throw new Exception("no characteristic");
                 }
 
-                
-                characteristics[0].ValueChanged += characteristicChanged;
+                this.charactersitics = characteristics[0];
 
-                await characteristics[0].WriteClientCharacteristicConfigurationDescriptorAsync(
+                this.charactersitics.ValueChanged += characteristicChanged;
+
+                var result = await this.charactersitics.WriteClientCharacteristicConfigurationDescriptorAsync(
                     GattClientCharacteristicConfigurationDescriptorValue.Notify
-                );        
+                );
+
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 CharacteristicReceived(this, new CharacteristicArgs(e));
             }
