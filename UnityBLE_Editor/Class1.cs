@@ -118,16 +118,9 @@ namespace UnityBLE
                 
                 var device = await BluetoothLEDevice.FromIdAsync(deviceId);
 
-                var services = device.GetGattService(new Guid(serviceUUID));
+                var service = device.GetGattService(new Guid(serviceUUID));
 
-
-                if (services.GetAllIncludedServices().Count == 0)
-                {
-                    throw new Exception("no service");
-                }
-
-
-                var characteristics = services.GetAllIncludedServices()[0].GetCharacteristics(new Guid(characteristicUUID));
+                var characteristics = service.GetAllIncludedServices()[0].GetCharacteristics(new Guid(characteristicUUID));
 
                 if(characteristics.Count == 0)
                 {
